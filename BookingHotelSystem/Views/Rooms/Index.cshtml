@@ -1,0 +1,65 @@
+﻿@model IEnumerable<BookingHotelSystem.Models.Room>
+
+@{
+    ViewData["Title"] = "Manage Room Assets";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Manage Room Assets & Inventory</h2>
+        <a asp-action="Create" class="btn btn-primary">+ Add New Room</a>
+    </div>
+
+    <!-- Search Room Form -->
+    <form asp-action="Index" method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="searchString" class="form-control" placeholder="Search by Room Number or Type..." />
+            <button type="submit" class="btn btn-outline-secondary">Search Room</button>
+        </div>
+    </form>
+
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Room Number</th>
+                <th>Room Type</th>
+                <th>Price (RM)</th>
+                <th>Status</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-muted">No rooms found in system.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><strong>@item.RoomNumber</strong></td>
+                        <td>@item.RoomType</td>
+                        <td>RM @item.Price.ToString("N2")</td>
+                        <td>
+                            @if (item.IsAvailable)
+                            {
+                                <span class="badge bg-success">Available</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Occupied / Maintenance</span>
+                            }
+                        </td>
+                        <td class="text-center">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete Room</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

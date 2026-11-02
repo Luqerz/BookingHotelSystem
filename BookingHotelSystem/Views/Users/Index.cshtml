@@ -1,0 +1,31 @@
+﻿@model IEnumerable<BookingHotelSystem.Models.User>
+
+@{
+    ViewData["Title"] = "Users List";
+}
+
+<div class="container mt-4">
+    <h2>Users Management</h2>
+    <p>
+        <a asp-action="Register" class="btn btn-primary">+ Register New User</a>
+    </p>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td><span class="badge bg-secondary">@item.Role</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

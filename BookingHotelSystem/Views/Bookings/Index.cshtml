@@ -1,0 +1,49 @@
+﻿@model IEnumerable<BookingHotelSystem.Models.Booking>
+
+@{
+    ViewData["Title"] = "Manage Bookings";
+}
+
+<div class="container mt-4">
+    <h2>Bookings List (User & Admin View)</h2>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">+ New Booking Room</a>
+    </p>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Customer Name</th>
+                <th>Room Number</th>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Payment Status</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.User?.Name</td>
+                    <td>@item.Room?.RoomNumber (@item.Room?.RoomType)</td>
+                    <td>@item.CheckInDate.ToString("yyyy-MM-dd")</td>
+                    <td>@item.CheckOutDate.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        @if (item.PaymentStatus == "Paid")
+                        {
+                            <span class="badge bg-success">Paid</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        <a asp-action="Receipt" asp-route-id="@item.Id" class="btn btn-sm btn-info">View Receipt</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Cancel Booking</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

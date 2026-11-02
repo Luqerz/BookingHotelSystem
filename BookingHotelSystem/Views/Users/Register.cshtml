@@ -1,0 +1,33 @@
+﻿@model BookingHotelSystem.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container mt-4">
+    <h2>User Registration</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Register">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Full Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email Address</label>
+                    <input asp-for="Email" class="form-control" type="email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input asp-for="Password" class="form-control" type="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+                <a asp-action="Login" class="btn btn-link">Already have an account? Login</a>
+            </form>
+        </div>
+    </div>
+</div>

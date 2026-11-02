@@ -1,0 +1,45 @@
+﻿@model BookingHotelSystem.Models.Booking
+
+@{
+    ViewData["Title"] = "View Receipt";
+}
+
+<div class="container mt-4">
+    <div class="card p-5 col-md-8 mx-auto shadow">
+        <h2 class="text-center text-success">Grand Horizon Hotel</h2>
+        <h5 class="text-center text-muted mb-4">Official Payment Receipt</h5>
+        <hr />
+        <div class="row mb-3">
+            <div class="col-sm-6">
+                <p><strong>Booking ID:</strong> #@Model.Id</p>
+                <p><strong>Customer Name:</strong> @Model.User?.Name</p>
+            </div>
+            <div class="col-sm-6 text-end">
+                <p><strong>Check-In:</strong> @Model.CheckInDate.ToString("yyyy-MM-dd")</p>
+                <p><strong>Check-Out:</strong> @Model.CheckOutDate.ToString("yyyy-MM-dd")</p>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Room Number</th>
+                    <th>Room Type</th>
+                    <th>Payment Status</th>
+                    <th class="text-end">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.Room?.RoomNumber</td>
+                    <td>@Model.Room?.RoomType</td>
+                    <td><span class="badge bg-success">@Model.PaymentStatus</span></td>
+                    <td class="text-end">RM @Model.Room?.Price.ToString("N2")</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center mt-4">
+            <a asp-controller="Rooms" asp-action="Index" class="btn btn-secondary">Back to Rooms</a>
+            <button onclick="window.print()" class="btn btn-primary">Print Receipt</button>
+        </div>
+    </div>
+</div>

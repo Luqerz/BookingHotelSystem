@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container mt-4">
+    <h2>System Login</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Login" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input name="email" class="form-control" type="email" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input name="password" class="form-control" type="password" required />
+                </div>
+                <button type="submit" class="btn btn-success">Login</button>
+                <a asp-action="Register" class="btn btn-link">Register new account</a>
+            </form>
+        </div>
+    </div>
+</div>
